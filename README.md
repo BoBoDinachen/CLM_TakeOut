@@ -29,15 +29,15 @@
 
 ##### 3. 购物车
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\购物车1.jpg" style="zoom:25%;" />
+   <img src="./page-image/购物车1.jpg" style="zoom:25%;" width="200" />
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\购物车2.jpg" style="zoom:25%;" />
+   <img src="./page-image/购物车2.jpg" style="zoom:25%;" width="200" />
 
 ##### 4. 订单
 
 #####  5.结算页面
 
-<img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\结算页面.jpg" style="zoom:25%;" />
+<img src="./page-image/结算页面.jpg" style="zoom:25%;" width="200"/>
 
 ##### 6. 个人中心
 
@@ -45,15 +45,15 @@
 
 ##### 7. 商品详情
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\商品详情.jpg" style="zoom:25%;" />
+   <img src="./page-image/商品详情.jpg" style="zoom:25%;" width="200"/>
 
 ##### 8. 用户登录
 
-<img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\登录.jpg" style="zoom:25%;" />
+<img src="./page-image/登录.jpg" style="zoom:25%;" width="200"/>
 
 ##### 9. 用户注册
 
-<img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\注册.jpg" style="zoom:25%;" />
+<img src="./page-image/注册.jpg" style="zoom:25%;" width="200"/>
 
 ### 四、开发日志
 * <b>2021/5/29:</b><br>
