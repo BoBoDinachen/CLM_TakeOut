@@ -1,0 +1,189 @@
+.details-box {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  // 遮罩层
+  background-color: rgba($color: #666666, $alpha: 0.5);
+  transition: all 2s linear;
+  // 内容区域
+  .details-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 70%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    // 图标
+    .icon-favorite{
+      position: absolute;
+      right: 80px;
+      top: 10px;
+      width: 1.7em;
+      height: 1.7em;
+      vertical-align: -0.15em;
+      color: #CCCCCC;
+      // color: #FF6600;
+      fill: currentColor;
+      overflow: hidden;
+    }
+    .favorite-active{
+      color: #FF6600;
+    }
+    .icon-close {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      width: 1.7em;
+      height: 1.7em;
+      vertical-align: -0.15em;
+      color: white;
+      fill: currentColor;
+      overflow: hidden;
+      // opacity: 0.5;
+    }
+    // 图片
+    .food-img{
+      border-radius: 10px 10px 0 0 ;
+      height: 250px;
+      // flex: 1;
+      object-fit: cover;
+      // opacity: 0.8;
+    }
+    // 内容
+    .content-box{
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      // 标签
+      .tag{
+        display: flex;
+        justify-content: flex-start;
+        span{
+          font-size: .7em;
+          font-weight: bold;
+          letter-spacing: 1px;
+          padding: 5px;
+          border-radius: 10px;
+          background-color: #CCCCCC;
+          opacity: .5;
+          margin-right: 10px;
+        }
+      }
+      // 商品描述
+      .describe{
+        label{
+          font-size: .8em;
+          font-weight: bold;
+          letter-spacing: 1px;
+          color: #996699;
+        }
+        p{
+          font-size: .9em;
+          margin-top: 5px;
+        }
+      }
+      // 口味选择
+      .select{
+        label{
+          font-size: .8em;
+          font-weight: bold;
+          letter-spacing: 1px;
+          color: #996699;
+        }
+        ul{
+          margin-top: 5px;
+          display: flex;
+          justify-content: flex-start;
+          li{
+            font-size: .8em;
+            padding:8px 20px 8px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            letter-spacing: 5px;
+            margin-right: 10px;
+            // box-shadow: 0 0 10px 1px #CCCCCC;
+            border: 1px solid #CCCCCC;
+          }
+          .active-select{
+            background-color: #eaba45;
+            border: unset;
+            color: white;
+          }
+        }
+      }
+      // 价钱
+      .total-price{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span{
+          font-size: 1.5em;
+          color: #eaba45;
+          font-weight: bold;
+        }
+        div{
+          width: 90px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          span{
+            font-weight: unset;
+            &:nth-of-type(1){
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              line-height: 32px;
+              border-radius: 50%;text-align: center;
+              color: #999999;
+              border: 1px solid #999999;
+            }
+            &:nth-of-type(2){
+              background-color: unset;
+              color: black;
+              font-weight: bold;
+              font-size: 1.2em;
+            }
+            &:nth-of-type(3){
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              line-height: 32px;
+              border-radius: 50%;text-align: center;
+              color: white;
+              background-color: #eaba45;
+              // border: 1px solid #999999;
+            }
+          }
+        }
+      }
+      button{
+        height: 50px;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 1.1em;
+        background-color: #eaba45;
+        transition: all .4s linear;
+        &:active{
+          font-size: 1.2em;
+          // color: #999999;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+
+// 显示
+.box-fade {
+  display: block;
+}

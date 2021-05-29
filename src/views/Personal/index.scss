@@ -1,0 +1,110 @@
+.personal-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 20px 10px 0;
+  // 资料卡片
+  .personal-info-card {
+    width: 100%;
+    height: 140px;
+    background-color: white;
+    box-shadow: 0 0 10px 3px #CCCCCC;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid black;
+    }
+    .info {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      span {
+        display: inline-block;
+        width: 100%;
+        label {
+          font-weight: bold;
+          margin-right: 3%;
+          &:nth-of-type(2) {
+            margin-left: 10%;
+          }
+        }
+      }
+    }
+  }
+  // 菜单列表
+  .menu-list{
+    margin-top: 20px;
+    width: 100%;
+    li{
+      position: relative;
+      height: 50px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      transition: all .3s linear;
+      &:active{
+        background-color: #CCCCCC;
+      }
+      label{
+        position: absolute;
+        left: 15%;
+        font-weight: bold;
+      }
+      span{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:nth-of-type(1) .icon {
+          width: 25px; height: 25px;
+          vertical-align: -0.15em;
+          fill: currentColor;
+          overflow: hidden;
+       }
+       &:nth-of-type(2){
+         background-image: url("../../assets/image/toRight.png");
+         background-repeat: no-repeat;
+         background-size: 25px;
+         background-position: center;
+         opacity: 0.3;
+       }
+      }
+    }
+  }
+  .btn-logout{
+    margin-top: 20px;
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    outline: none;
+    letter-spacing: 10px;
+    text-indent: 10px;
+    font-weight: bold;
+    background-color: #FF6666;
+    transition: all .3s linear;
+    &:active{
+      background-color: #CCCCCC;
+    }
+  }
+}

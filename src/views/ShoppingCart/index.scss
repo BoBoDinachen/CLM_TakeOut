@@ -1,0 +1,217 @@
+.cart-box{
+  width: 100%;
+  // background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px 0 0;
+  position: relative;
+  overflow: hidden;
+  // 标题栏
+  .cart-title{
+    margin-top: 5px;
+    background-color: #333333;
+    padding: 10px 10px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    span{
+      &:nth-of-type(2){
+        background-color:#999086;
+        color: white;
+        padding: 5px;
+        font-size: .8em;
+        font-weight: bold;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        &:active{
+          color:#999086;
+        }
+        &::before{
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url("../../assets/icon/delete.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 20px;
+        }
+      }
+    }
+  }
+  // 商品列表
+  .goods-list{
+    margin-top: 5px;
+    flex: 1;
+    background-color:#f2f2f2;
+    border-radius: 5px;
+    li{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: white;
+      // margin: 5px 0 5px;
+      padding: 10px 15px 10px 10px;
+      border-radius: 10px;
+      border-top:  #f2f2f2 solid 5px;
+      border-bottom: #f2f2f2 solid 5px;
+      // 勾选框
+      .check{
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        margin-right: 10px;
+        .icon{
+          width: 1.3em; height: 1.3em;
+          vertical-align: -0.15em;
+          color: #CCCCCC;
+          // color: #FF9933;
+          fill: currentColor;
+          overflow: hidden;
+        }
+        .check-incon{
+          color: #FF9933;
+        }
+      }
+      // 图片
+      img{
+        width: 5.2em;
+        height: 5.2em;
+        object-fit: cover;
+        margin-right: 5px;
+      }
+      // 商品信息
+      .goods-info{
+        flex: 1;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        // 价钱和数量
+        .tag{
+          display: inline-block;
+          width: 40px;
+          text-align: center;
+          border-radius: 10px;
+          font-size: .7em;
+          font-weight: bold;
+          padding: 2px;
+          color: white;
+          background-color: #eaba45;
+        }
+        .price-number{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          label{
+            font-weight: bold;
+            font-size: 1.1em;
+          }
+          div{
+            width: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // 数量
+            span{
+              font-weight: bold;
+              &:nth-of-type(1){
+                display: inline-block;
+                width: 1.7em;
+                height: 1.7em;
+                line-height: 1.7em;
+                border-radius: 50%;text-align: center;
+                color: #999999;
+                border: 1px solid #999999;
+              }
+              &:nth-of-type(2){
+                background-color: unset;
+                color: black;
+                font-size: 1.2em;
+              }
+              &:nth-of-type(3){
+                display: inline-block;
+                width: 1.7em;
+                height: 1.7em;
+                line-height: 1.7em;
+                border-radius: 50%;text-align: center;
+                color: white;
+                background-color: #eaba45;
+                // border: 1px solid #999999;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // 购物车底部
+  .cart-footer{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333333;
+    color: white;
+    padding: 0px 0px 0px 10px;
+    border-radius: 30px;
+    div{
+      &:nth-of-type(1){
+        display: flex;
+        align-items: center;
+        span{
+          display: inline-block;
+          width: 1.3em;
+          height: 1.3em;
+          margin-right: 5px;
+          .icon{
+            width: 1.3em; height: 1.3em;
+            vertical-align: -0.15em;
+            color: #CCCCCC;
+            // color: #FF9933;
+            fill: currentColor;
+            overflow: hidden;
+          }
+          .checkAll-incon{
+            color: #FF9933;
+          }
+        }
+      }
+      &:nth-of-type(2){
+        margin-left: 20px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        label{
+          margin-left: 5px;
+          font-weight: bold;
+          color: #FF9933;
+          font-size: 1.3em;
+        }
+      }
+    }
+    // 结算按钮
+    button{
+      right: 0;
+      width: 100px;
+      height: 55px;
+      border-radius: 0 30px 30px 0;
+      background-color: #eaba45;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 5px;
+      font-size: 1.1em;
+      text-indent: 5px;
+      transition: all .3s linear;
+      &:active{
+        background-color: rgba($color: #333333, $alpha: .7);
+      }
+    }
+  }
+}

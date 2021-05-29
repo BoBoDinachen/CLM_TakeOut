@@ -1,0 +1,117 @@
+.login-box {
+  width: 100%;
+  padding: 0 20px 0;
+  top: 0;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  // 背景图
+  .background {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 400px;
+    background-image: url("../../assets/image/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-position: center;
+    border-radius: 0 0 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: -1;
+    h3{
+      margin-left: 15px;
+      margin-bottom: 10px;
+      color: white;
+      font-size: 20px;
+      letter-spacing: 3px;
+    }
+    h3:last-child{
+      margin-bottom: 180px;
+    }
+  }
+  // 登录输入框
+  .login-input{
+    margin-top: 70%;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    padding: 10px 20px 0;
+    background-color: white;
+    box-shadow: 0 5px 10px 5px #CCCCCC;
+    .user-input{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      width: 100%;
+      label{
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      input{
+        width: 100%;
+        height: 40px;
+        padding-left: 30px;
+        font-size: 1em;
+        letter-spacing: 2px;
+        border-bottom: 2px solid #ffbe10;
+      }
+      span{
+        position: absolute;
+        bottom: 13px;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-image: url("../../assets/icon/tel.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20px;
+
+      }
+    }
+    .pwd-input{
+      @extend .user-input;
+      margin-top: 20px;
+      span{
+        background-image: url("../../assets/icon/pwd.png");
+      }
+    }
+
+  }
+  // 登录按钮
+  .btn-login{
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+    letter-spacing: 10px;
+    text-indent: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #ffbe10;
+    transition: all .3s linear;
+    &:active{
+      background-color: #CCCCCC;
+    }
+  }
+  // 去注册
+  .link—register{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;justify-content: flex-end;
+  }
+  p{
+    position: fixed;
+    bottom: 100px;
+    font-size: 12px;
+    font-weight: bold;
+    span{
+      color: #ffbe10;
+    }
+  }
+}

@@ -1,18 +1,27 @@
 <template>
-  <div class="main-container" ref="containerElem">
-    <router-view />
-  </div>
-  <LayoutMenuBar />
+  <LayoutHeader />
+  <router-view />
 </template>
 
 <script setup>
-import LayoutMenuBar from "layout/MenuBar.vue";
-import { onMounted, ref } from "vue";
-const containerElem = ref(null);
-onMounted(() => {
-  console.log(containerElem.value); // null
-  containerElem.value.style.height = document.body.clientHeight - 57 + "px";
+import LayoutHeader from "@layout/components/Header.vue";
+
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+// 注册全局守卫,判断用户登录状态
+router.beforeEach((to, from) => {
+  const token = localStorage["token"];
+  const pathName = to.path.split("/")[2];
+  if (
+    (token === "" || token === undefined) &&
+    (pathName === "shoppingCart" || pathName === "order" || pathName === "personal")
+  ) {
+    router.push("/app/prompt");
+  }
 });
+onMounted(() => {});
+// 界面全屏的方法
 </script>
 
 <style>
@@ -21,11 +30,14 @@ onMounted(() => {
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
+  height: 100vh;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
 }
 a {
   text-decoration: none;
@@ -37,8 +49,12 @@ a {
 ul {
   list-style: none;
 }
-.main-container {
-  background-color: #cccccc;
-  height: 100vh;
+button {
+  border: none;
+  outline: none;
+}
+input {
+  outline: none;
+  border: none;
 }
 </style>
