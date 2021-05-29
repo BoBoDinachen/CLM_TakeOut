@@ -41,7 +41,7 @@
 
 ##### 6. 个人中心
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\个人中心.jpg" style="zoom:25%;" />
+   <img src="https://github.com/CLMTakeOut/CLM_TakeOut_FrontEnd/blob/master/page-image/个人中心.jpg" style="zoom:25%;" />
 
 ##### 7. 商品详情
 
