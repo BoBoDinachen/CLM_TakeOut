@@ -41,7 +41,7 @@
 
 ##### 6. 个人中心
 
-   <img src="./page-image/个人中心.jpg" style="zoom:25%;width:200px" />
+   <img src="./page-image/个人中心.jpg" style="zoom:25%;"  width="200"/>
 
 ##### 7. 商品详情
 
