@@ -1,0 +1,258 @@
+.shopList-box{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  // background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 5px;
+  overflow: scroll;
+  padding-bottom: 10px;
+  // 搜索框
+  .search-box{
+    width: 100%;
+    padding: 5px 10px 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    img{
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      left: 15px;
+    }
+    input{
+      height: 40px;
+      width: 100%;
+      padding-left: 40px;
+      background-color: white;
+      font-size: 1em;
+      font-weight: bold;
+      color: #333333;
+      border-radius: 5px;
+      box-shadow: 0  2px 5px .1px #CCCCCC;
+    }
+  }
+  // 店铺分类
+  .shop-category{
+    padding:5px 10px 5px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 10px 3px #CCCCCC;
+    border-radius: 10px;
+    width: 95%;
+    .active{
+      background-color: paleturquoise;
+      color: white;
+    }
+    li{
+      border-radius: 10px;
+      width: 80px;
+      padding:5px 10px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s linear;
+      // 图标
+      .icon{
+        width: 3em; height: 3em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+      span{
+        font-weight: bold;
+        color: #333333;
+      }
+    }
+  }
+  // 标题
+  .title{
+    // background-color: palegreen;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 5px;
+  }
+  // 店铺列表盒子
+  .shop-list-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding:10px 10px 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 0 10px 1px #CCCCCC;
+    // 排序
+    .sort-box{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      // background-color: palevioletred;
+      padding: 7px 0 7px;
+      label{
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      span{
+        margin-left: 10px;
+        font-size: .9em;
+        color: #746d6d;
+        font-weight: bold;
+      }
+    }
+    // 标签
+    .tag-box{
+      // background-color: brown;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      span{
+        border-radius: 5px;
+        color: #333333;
+        font-weight: bold;
+        padding: 3px 10px 3px;
+        font-size: .9em;
+        &:nth-of-type(1){
+          background-color: #ea9518;
+        }
+        &:nth-of-type(2){
+          background-color: #ff8c59;
+        }
+        &:nth-of-type(3){
+          background-color: #20ceb6;
+        }
+        &:nth-of-type(4){
+          background-color: #32ab03;
+        }
+      }
+    }
+    // 店铺列表
+    ul{
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid #CCCCCC;
+      li{
+        display: flex;
+        border-bottom: 1px solid #CCCCCC;
+        padding: 5px 0 0;
+        // 店铺图片
+        img{
+          width: 70px;
+          height: 70px;
+          object-fit: cover;
+          margin-right: 10px;
+        }
+        // 商品信息
+        .shop-info-box{
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          div{
+            // 店铺名
+            &:nth-of-type(1){
+              display: flex;
+              align-items: center;
+              label{
+                padding:0 5px 0;
+                border-radius: 5px;
+                margin-right: 5px;
+                background-color: #ef8440;
+                color: white;
+              }
+            }
+            // 评分和销售量
+            &:nth-of-type(2){
+              margin: 3px 0 3px;
+              display: flex;
+              align-items: center;
+              span{
+                margin-right: 10px;
+                &:nth-of-type(1){
+                  color: #FFCC33;
+                  &::before{
+                    content: "★";
+                    color: #ef8440;
+                  }
+                }
+                &:nth-of-type(2){
+                  font-size: .8em;
+                }
+              }
+            }
+            // 配送
+            &:nth-of-type(3){
+              font-size: .8em;
+              margin-bottom: 3px;
+              display: flex;
+              justify-content: space-between;
+              span{
+                &:nth-of-type(1){
+                  // margin-right: 20px;
+                  flex: 2;
+                  // width: 100%;
+                }
+                &:nth-of-type(2){
+                  // background-color: #ea706a;
+                  // width: 130px;
+                  flex: 1;
+                  // padding-left: 20px;
+                  text-align: right;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+              }
+            }
+          }
+          // 优惠
+          .discounts-box{
+            border-top: 1px solid #CCCCCC;
+            padding-top: 5px;
+            display: flex;
+            flex-direction: column;
+            // background-color: pink;
+            span{
+              // padding-left: 20px;
+              display: flex;
+              align-items: center;
+              margin-bottom: 5px;
+              font-size: .8em;
+              &::before{
+                content: "减";
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #ea706a;
+                border: 2px solid #999999;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                width: 20px;
+                height: 20px;
+                margin-right: 5px;
+              }
+              &:nth-of-type(1){
+                &::before{
+                  content: "减";
+                }
+              }
+              &:nth-of-type(2){
+                &::before{
+                  content: "折";
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

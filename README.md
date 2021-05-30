@@ -41,7 +41,7 @@
 
 ##### 6. 个人中心
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\个人中心.jpg" style="zoom:25%;" />
+   <img src="[CLM_TakeOut_FrontEnd/个人中心.jpg at master · CLMTakeOut/CLM_TakeOut_FrontEnd (github.com)](https://github.com/CLMTakeOut/CLM_TakeOut_FrontEnd/blob/master/page-image/个人中心.jpg)" style="zoom:25%;" />
 
 ##### 7. 商品详情
 
@@ -59,3 +59,6 @@
 * <b>2021/5/29:</b><br>
   1. 完成列表滑动删除组件的封装
   2. 购物车跳转结算页面，以及结算页面的编写
+* <b>2021/5/30:</b><br>
+  1. 首页、结算页面样式优化
+  2. 新增选择店铺页面，以及商品分类页面跳转

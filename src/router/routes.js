@@ -1,14 +1,15 @@
 // 导入路由组件，懒加载
 import Layout from '@layout/Layout.vue';
-import Login from "../views/Login/index.vue"
-import Register from "../views/Register/index.vue"
+import Login from "../views/Login/Login.vue"
+import Register from "../views/Register/Register.vue"
 // view组件
-const Home = () => import("../views/Home/index.vue")
-const Category = () => import("../views/Category/index.vue");
-const ShoppingCart = () => import("../views/ShoppingCart/index.vue");
+const Home = () => import("../views/Home/Home.vue")
+const ShopList = () => import("../views/ShopList/ShopList.vue");
+const Category = () => import("../views/Category/Category.vue");
+const ShoppingCart = () => import("../views/ShoppingCart/ShoppingCart.vue");
 const Settlement = () => import("../views/Settlement/Settlement.vue");
-const Order = () => import("../views/Order/index.vue");
-const Personal = () => import("../views/Personal/index.vue");
+const Order = () => import("../views/Order/Order.vue");
+const Personal = () => import("../views/Personal/Personal.vue");
 // components 组件
 const Prompt = () => import("@comps/Prompt.vue");
 // 定义路由
@@ -19,15 +20,25 @@ const routes = [
   {
     path: "/app", component: Layout, name: "app",
     children: [
+      // 主页
       { path: "home", component: Home, name: "home" },
-      { path: "category", component: Category, name: "category" },
+      // 店铺列表
       {
-        path: "shoppingCart", component: ShoppingCart, name: "shoppingCart", children: [
-          {path:"settlement",component: Settlement,name: "Settlement"}
+        path: "shopList", component: ShopList, name: "shopList", children: [
+          {path:"category",component:Category,name:"category"}
         ]
       },
+      // 购物车
+      {
+        path: "shoppingCart", component: ShoppingCart, name: "shoppingCart", children: [
+          { path: "settlement", component: Settlement, name: "settlement" }
+        ]
+      },
+      // 订单
       { path: "order", component: Order, name: "order" },
+      // 个人中心
       { path: "personal", component: Personal, name: "personal" },
+      // 提示登录
       { path: "prompt", component: Prompt, name: "prompt" },
       // 当没有匹配到子路由时，可以将path设置为空，渲染其它的视图
     ]

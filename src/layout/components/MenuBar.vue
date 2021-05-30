@@ -7,15 +7,18 @@
         </svg>
         <span>发现</span>
       </router-link>
-      <router-link to="/app/category">
+      <router-link
+        to="/app/shopList"
+        :class="[state.isActive2 ? 'router-link-exact-active' : '']"
+      >
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fenlei"></use>
         </svg>
-        <span>分类</span>
+        <span>店铺</span>
       </router-link>
       <router-link
         to="/app/shoppingCart"
-        :class="[isActive ? 'router-link-exact-active' : '']"
+        :class="[state.isActive ? 'router-link-exact-active' : '']"
       >
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-ziyuan2"></use>
@@ -39,33 +42,44 @@
 </template>
 
 <script setup>
-import { watch, ref, onMounted } from "vue";
+import { watch, ref, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-const isActive = ref(false);
+const state = reactive({
+  isActive: false,
+  isActive2: false,
+});
 // 监听路由，保持活动
 onMounted(() => {
-  // 判断三级路由
+  // 组件加载时判断三级路由
   switch (route.path.split("/")[3]) {
     case "settlement":
-      isActive.value = true;
+      state.isActive = true;
+      break;
+    case "category":
+      state.isActive2 = true;
       break;
     default:
-      isActive.value = false;
+      state.isActive = false;
+      state.isActive2 = false;
       break;
   }
 });
 watch(
   () => route.path,
   async (newPaht) => {
-    // 判断三级路由
+    // 路由变化时判断三级路由
     switch (newPaht.split("/")[3]) {
       case "settlement":
-        isActive.value = true;
+        state.isActive = true;
+        break;
+      case "category":
+        state.isActive2 = true;
         break;
       default:
-        isActive.value = false;
+        state.isActive = false;
+        state.isActive2 = false;
         break;
     }
   }

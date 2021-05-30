@@ -95,6 +95,14 @@ export default {
           amount: 3,
           type: "盖饭",
         },
+        {
+          id: "002",
+          name: "炒牛肉",
+          shop_name: "南昌小吃店",
+          price: "14",
+          amount: 3,
+          type: "盖饭",
+        },
       ],
     });
     // 处理总价格
