@@ -1,5 +1,5 @@
 .shopList-box{
-  position: relative;
+  // position: relative;
   height: 100%;
   width: 100%;
   // background-color: aquamarine;
@@ -17,7 +17,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     img{
       position: absolute;
       width: 30px;
@@ -41,7 +41,7 @@
     padding:5px 10px 5px;
     display: flex;
     justify-content: space-between;
-    box-shadow: 0 0 10px 3px #CCCCCC;
+    box-shadow: 0 2px 10px 3px #CCCCCC;
     border-radius: 10px;
     width: 95%;
     .active{
@@ -176,7 +176,8 @@
               span{
                 margin-right: 10px;
                 &:nth-of-type(1){
-                  color: #FFCC33;
+                  // color: #FFCC33;
+                  color: #ef8440;
                   &::before{
                     content: "★";
                     color: #ef8440;
@@ -207,6 +208,7 @@
                   text-align: right;
                   white-space: nowrap;
                   overflow: hidden;
+                  // color: #999999;
                   text-overflow: ellipsis;
                 }
               }
@@ -219,6 +221,7 @@
             display: flex;
             flex-direction: column;
             // background-color: pink;
+            color: #999999;
             span{
               // padding-left: 20px;
               display: flex;
@@ -231,7 +234,7 @@
                 justify-content: center;
                 align-items: center;
                 background-color: #ea706a;
-                border: 2px solid #999999;
+                // border: 2px solid #999999;
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;

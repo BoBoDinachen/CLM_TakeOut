@@ -38,7 +38,7 @@
       </div>
       <!-- 店铺列表 -->
       <ul>
-        <li v-for="shop in state.shopList">
+        <li v-for="shop in state.shopList" @click="goToCategory(shop.id)">
           <img
             src="http://loftcn.com/wp-content/uploads/2019/07/20190708_154641_051.jpg"
             alt=""
@@ -87,11 +87,16 @@ export default {
   },
   methods: {
     // 前往店铺的商品分类界面
-    goToCategory() {
-      console.log("触发了");
-      this.$router.push("/app/shopList/category");
+    goToCategory(shopId) {
+      console.log("触发了shopId:", shopId);
+      this.$router.push({
+        path: "/app/shopList/category",
+        query: {
+          shopId: shopId,
+        },
+      });
     },
-    // 点击每个店铺分类
+    // 点击每个店铺分类图标
     handelClickMenu(menu) {
       // 将其他的meun的active设置false
       this.menus.forEach((menu) => {

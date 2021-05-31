@@ -43,7 +43,7 @@ watch(
           title.value = "提交订单";
           break;
         case "category":
-          title.value = "选择分类";
+          title.value = "店铺商品";
           break;
         default:
           title.value = "吃了吗外卖";
