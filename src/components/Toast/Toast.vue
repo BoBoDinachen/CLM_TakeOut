@@ -38,7 +38,7 @@ function show() {
   top: 0;
   left: 50%;
   transform: translate(-50%, -60px);
-  width: 80%;
+  width: 100%;
   height: 50px;
   border-radius: 0 0 50% 50%;
   text-align: center;

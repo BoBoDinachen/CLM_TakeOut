@@ -29,12 +29,14 @@
       </div>
       <!-- 列表 -->
       <ul class="shop-list">
-        <li v-for="shop in state.shopList" :key="shop.shopId">
-          <img src="@image/炒牛肉.jpeg" alt="" />
+        <li
+          v-for="shop in state.shopList"
+          :key="shop.shopId"
+          @click="goToCategory(shop.shopId, shop.shopName)"
+        >
+          <img :src="shopImgUrl + '/getShopLogo/' + shop.shopId" alt="" />
           <div>
-            <img src="../../assets/image/logo.jpg" alt="" /><span>{{
-              shop.shopName
-            }}</span>
+            <img src="../../assets/logo.jpg" alt="" /><span>{{ shop.shopName }}</span>
           </div>
         </li>
       </ul>
@@ -48,9 +50,13 @@
       </div>
       <!-- 商品列表 -->
       <ul class="goods-recommend-list">
-        <li v-for="goods in state.goodsList" :key="goods.id" @click="handleGoods(goods)">
-          <img src="@image/炒牛肉.jpeg" alt="" />
-          <span>{{ goods.name }}</span>
+        <li
+          v-for="goods in state.goodsList"
+          :key="goods.goodsId"
+          @click="handleGoods(goods)"
+        >
+          <img :src="imgUrl + '/getGoodsPicture/' + goods.goodsId" alt="" />
+          <span>{{ goods.goodsName }}</span>
           <div>
             <span>￥{{ goods.price }}</span>
             <span>评分:{{ goods.score }}</span>
@@ -70,22 +76,22 @@
       <ul class="sales-ranking-list">
         <li
           v-for="goods in state.rankingList"
-          :key="goods.id"
+          :key="goods.goodsId"
           @click="handleGoods(goods)"
         >
-          <img src="https://ali.xinshipu.cn/20180827/original/1535340097824.jpg" alt="" />
+          <img :src="imgUrl + '/getGoodsPicture/' + goods.goodsId" alt="" />
           <div class="goods-info">
             <div>
-              <label>{{ goods.type }}</label>
-              <span>{{ goods.name + "(" + goods.shop_name + ")" }}</span>
+              <label>{{ goods.goodsType }}</label>
+              <span>{{ goods.goodsName + "(" + goods.shopName + ")" }}</span>
             </div>
             <div>
               <span>★{{ goods.score }}</span>
-              <span>销量:{{ goods.sales }}</span>
+              <span>销量:{{ goods.salesVolume }}</span>
               <span>售价:￥{{ goods.price }}</span>
             </div>
             <!-- 描述 -->
-            <p>下饭又美味</p>
+            <p>{{ goods.goodsDescribe }}</p>
           </div>
         </li>
       </ul>
@@ -96,6 +102,8 @@
 <script setup>
 import { ref, onMounted, reactive, inject, defineProps, defineEmit } from "vue";
 import { useRouter } from "vue-router";
+import { getShopList, getShopById, shopImgUrl } from "../../request/api/shop";
+import { getListAllRecommend, getConsider, imgUrl } from "../../request/api/goods";
 const router = useRouter();
 // 注入应用实例的方法
 const toast = inject("toast");
@@ -107,45 +115,8 @@ const state = reactive({
     { icon: "#icon-meishi", name: "美食推荐" },
     { icon: "#icon-meishi1", name: "销量排行" },
   ],
-  shopList: [
-    {
-      shopId: "1",
-      shopLog: "https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg",
-      shopName: "好吃不火饭店",
-    },
-    {
-      shopId: "2",
-      shopLog: "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg",
-      shopName: "吃得流泪饭店",
-    },
-    {
-      shopId: "3",
-      shopLog: "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg",
-      shopName: "吃得流泪饭店",
-    },
-    {
-      shopId: "4",
-      shopLog: "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg",
-      shopName: "吃得流泪饭店",
-    },
-    {
-      shopId: "5",
-      shopLog: "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg",
-      shopName: "吃得流泪饭店",
-    },
-  ],
-  goodsList: [
-    { id: "1", goodsImgUrl: "", name: "炒牛肉", price: "14", score: 3 },
-    {
-      id: "2",
-      goodsImgUrl: "",
-      name: "炒牛肉",
-      price: "14",
-      score: 3,
-    },
-    { id: "3", goodsImgUrl: "", name: "炒牛肉", price: "14", score: 4 },
-    { id: "4", goodsImgUrl: "", name: "炒牛肉", price: "14", score: 5 },
-  ],
+  shopList: [],
+  goodsList: [],
   rankingList: [
     {
       id: "1",
@@ -158,39 +129,38 @@ const state = reactive({
       score: "4",
       describe: "下饭又美味",
     },
-    {
-      id: "2",
-      img_url: "",
-      name: "泡椒猪肝",
-      type: "盖饭",
-      shop_name: "南昌小吃店",
-      sales: "255",
-      price: "14",
-      score: "4",
-      describe: "下饭又美味",
-    },
-    {
-      id: "3",
-      img_url: "",
-      name: "辣子鸡",
-      type: "盖饭",
-      shop_name: "南昌小吃店",
-      sales: "567",
-      price: "14",
-      score: "4",
-      describe: "下饭又美味",
-    },
   ],
 });
-onMounted(() => {
-  toast({
-    text: "显示成功!",
-    type: "success",
-  });
+onMounted(() => {});
+// 加载店铺列表
+getShopList().then((res) => {
+  // console.log(res);
+  state.shopList = res.data.shopList;
+});
+// 加载推荐商品
+getListAllRecommend().then((res) => {
+  // console.log(res.data.goodsList);
+  state.goodsList = res.data.goodsList;
+});
+// 加载销量排行
+getConsider().then((res) => {
+  console.log(res);
+  state.rankingList = res.data.goodsList;
 });
 // 点击商品
 function handleGoods(goods) {
   showGoodsDetails({ goods });
+}
+// 点击店铺
+function goToCategory(shopId, shopName) {
+  console.log("触发了shopId:", shopId);
+  router.push({
+    path: "/app/shopList/category",
+    query: {
+      shopId: shopId,
+      shopName: shopName,
+    },
+  });
 }
 </script>
 

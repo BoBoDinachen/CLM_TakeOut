@@ -9,7 +9,10 @@ const Category = () => import("../views/Category/Category.vue");
 const ShoppingCart = () => import("../views/ShoppingCart/ShoppingCart.vue");
 const Settlement = () => import("../views/Settlement/Settlement.vue");
 const Order = () => import("../views/Order/Order.vue");
+const OrderDetails = () => import("../views/OrderDetails/OrderDetails.vue");
 const Personal = () => import("../views/Personal/Personal.vue");
+const Address = () => import("../views/Address/Address.vue");
+const IncreAddress = () => import("../views/IncreAddress/IncreAddress.vue");
 // components 组件
 const Prompt = () => import("@comps/Prompt.vue");
 // 定义路由
@@ -25,7 +28,7 @@ const routes = [
       // 店铺列表
       {
         path: "shopList", component: ShopList, name: "shopList", children: [
-          {path:"category",component:Category,name:"category"}
+          { path: "category", component: Category, name: "category" }
         ]
       },
       // 购物车
@@ -35,9 +38,18 @@ const routes = [
         ]
       },
       // 订单
-      { path: "order", component: Order, name: "order" },
+      {
+        path: "order", component: Order, name: "order", children: [
+          { path: "details", component: OrderDetails, name: "orderDetails" }
+        ]
+      },
       // 个人中心
-      { path: "personal", component: Personal, name: "personal" },
+      {
+        path: "personal", component: Personal, name: "personal", children: [
+          { path: "address", component: Address, name: Address },
+          { path: "increAddress", component: IncreAddress, name: IncreAddress },
+        ]
+      },
       // 提示登录
       { path: "prompt", component: Prompt, name: "prompt" },
       // 当没有匹配到子路由时，可以将path设置为空，渲染其它的视图

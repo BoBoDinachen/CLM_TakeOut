@@ -8,13 +8,16 @@ import LayoutHeader from "@layout/components/Header.vue";
 
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 const router = useRouter();
+const store = useStore();
 // 注册全局守卫,判断用户登录状态
 router.beforeEach((to, from) => {
   const token = localStorage["token"];
+  const customerId = sessionStorage["uid"];
   const pathName = to.path.split("/")[2];
   if (
-    (token === "" || token === undefined) &&
+    (token === "" || token === undefined || customerId === undefined) &&
     (pathName === "shoppingCart" || pathName === "order" || pathName === "personal")
   ) {
     router.push("/app/prompt");

@@ -37,7 +37,7 @@ export default {
     };
   },
   props: {
-    index: String,
+    index: Number,
   },
   inject: ["toast"],
   mounted() {
@@ -56,7 +56,7 @@ export default {
       // 计算滑动的距离
       let moveX = this.startX - e.touches[0].pageX;
       this.moveX = moveX;
-      if (this.moveX > 10) {
+      if (this.moveX > 50) {
         this.isSlide = true;
         this.$emit("changeActiveItem", this);
       } else {
@@ -74,10 +74,10 @@ export default {
     handleDelete() {
       this.$refs.btns.style.display = "none";
       this.$emit("deleteItem", this.index);
-      this.toast({
-        text: "删除成功！",
-        type: "success",
-      });
+      // this.toast({
+      //   text: "删除成功！",
+      //   type: "success",
+      // });
     },
   },
 };

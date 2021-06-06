@@ -38,11 +38,12 @@
       </div>
       <!-- 店铺列表 -->
       <ul>
-        <li v-for="shop in state.shopList" @click="goToCategory(shop.id)">
-          <img
-            src="http://loftcn.com/wp-content/uploads/2019/07/20190708_154641_051.jpg"
-            alt=""
-          />
+        <li
+          :key="shop.shopId"
+          v-for="shop in state.shopList"
+          @click="goToCategory(shop.shopId, shop.shopName)"
+        >
+          <img :src="shopImgUrl + '/getShopLogo/' + shop.shopId" alt="" />
           <div class="shop-info-box">
             <!-- 店铺名 -->
             <div>
@@ -57,7 +58,7 @@
             <!-- 配送方式和地址 -->
             <div>
               <span>起送￥0 / 配送费3元,满20元免</span>
-              <span>{{ shop.address }}</span>
+              <span>{{ shop.shopAddress }}</span>
             </div>
             <!-- 优惠 -->
             <div class="discounts-box">
@@ -73,10 +74,12 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onBeforeMount } from "vue";
+import { getShopList, shopImgUrl } from "../../request/api/shop";
 export default {
   data() {
     return {
+      shopImgUrl,
       menus: [
         { icon: "#icon-zhongcan", name: "中餐厅", isActive: false },
         { icon: "#icon-hanbaodian", name: "汉堡店", isActive: false },
@@ -87,12 +90,13 @@ export default {
   },
   methods: {
     // 前往店铺的商品分类界面
-    goToCategory(shopId) {
+    goToCategory(shopId, shopName) {
       console.log("触发了shopId:", shopId);
       this.$router.push({
         path: "/app/shopList/category",
         query: {
           shopId: shopId,
+          shopName: shopName,
         },
       });
     },
@@ -117,29 +121,14 @@ export default {
           salesVolume: 700, //销售量
           address: "重庆大学城", // 地址
         },
-        {
-          id: "002",
-          shopName: "好吃不火饭店",
-          grade: "4.5", //评分
-          salesVolume: 700, //销售量
-          address: "重庆大学城电子工程职业学院", // 地址
-        },
-        {
-          id: "003",
-          shopName: "蟹黄堡",
-          grade: "4.5", //评分
-          salesVolume: 700, //销售量
-          address: "重庆大学城电子工程职业学院", // 地址
-        },
-        {
-          id: "004",
-          shopName: "中华小当家",
-          grade: "4.5", //评分
-          salesVolume: 700, //销售量
-          address: "重庆大学城电子工程职业学院", // 地址
-        },
       ],
     });
+    onBeforeMount(() => {
+      getShopList().then((res) => {
+        state.shopList = res.data.shopList;
+      });
+    });
+
     return {
       state,
     };

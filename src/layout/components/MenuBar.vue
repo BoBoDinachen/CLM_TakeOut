@@ -25,13 +25,19 @@
         </svg>
         <span>购物车</span>
       </router-link>
-      <router-link to="/app/order">
+      <router-link
+        to="/app/order"
+        :class="[state.isActive3 ? 'router-link-exact-active' : '']"
+      >
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-ziyuan"></use>
         </svg>
         <span>订单</span>
       </router-link>
-      <router-link to="/app/personal">
+      <router-link
+        to="/app/personal"
+        :class="[state.isActive4 ? 'router-link-exact-active' : '']"
+      >
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-wode1"></use>
         </svg>
@@ -49,39 +55,53 @@ const route = useRoute();
 const state = reactive({
   isActive: false,
   isActive2: false,
+  isActive3: false,
+  isActive4: false,
 });
-// 监听路由，保持活动
-onMounted(() => {
-  // 组件加载时判断三级路由
+function changeActive() {
   switch (route.path.split("/")[3]) {
     case "settlement":
       state.isActive = true;
+      state.isActive2 = false;
+      state.isActive3 = false;
+      state.isActive4 = false;
       break;
     case "category":
+      state.isActive = false;
       state.isActive2 = true;
+      state.isActive3 = false;
+      state.isActive4 = false;
+      break;
+    case "orderDetails":
+      state.isActive = false;
+      state.isActive2 = false;
+      state.isActive3 = true;
+      state.isActive4 = false;
+      break;
+    case "address":
+      state.isActive = false;
+      state.isActive2 = false;
+      state.isActive3 = false;
+      state.isActive4 = true;
       break;
     default:
       state.isActive = false;
       state.isActive2 = false;
+      state.isActive3 = false;
+      state.isActive4 = false;
       break;
   }
+}
+// 监听路由，保持活动
+onMounted(() => {
+  // 组件加载时判断三级路由
+  changeActive();
 });
 watch(
   () => route.path,
   async (newPaht) => {
     // 路由变化时判断三级路由
-    switch (newPaht.split("/")[3]) {
-      case "settlement":
-        state.isActive = true;
-        break;
-      case "category":
-        state.isActive2 = true;
-        break;
-      default:
-        state.isActive = false;
-        state.isActive2 = false;
-        break;
-    }
+    changeActive();
   }
 );
 </script>

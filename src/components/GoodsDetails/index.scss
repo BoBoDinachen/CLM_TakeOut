@@ -19,6 +19,7 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     // 图标
     .icon-favorite{
       position: absolute;
@@ -50,18 +51,36 @@
     // 图片
     .food-img{
       border-radius: 10px 10px 0 0 ;
-      height: 250px;
+      // height: 250px; //820
+      // height: 200px; //730
+      // height: 150px; // 640
       // flex: 1;
       object-fit: cover;
       // opacity: 0.8;
+      @media screen and (min-height: 640px){
+        height: 150px
+      }
+      @media screen and (min-height: 730px){
+        height: 200px
+      }
+      @media screen and (min-height: 820px){
+        height: 250px
+      }
     }
     // 内容
     .content-box{
       flex: 1;
-      padding: 20px;
+      padding: 10px 20px 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      h2{
+        a{
+          font-size: .5em;
+          text-decoration: underline;
+          color: #996699;
+        }
+      }
       // 标签
       .tag{
         display: flex;
@@ -88,6 +107,12 @@
         p{
           font-size: .9em;
           margin-top: 5px;
+          height: 39px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
       }
       // 口味选择

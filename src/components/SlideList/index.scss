@@ -1,6 +1,7 @@
 .slide-list-item {
   position: relative;
   // background-color: #CCCCCC;
+  overflow: hidden;
   &-content {
     display: flex;
     justify-content: flex-start;

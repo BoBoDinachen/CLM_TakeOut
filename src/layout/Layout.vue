@@ -17,8 +17,8 @@ import { onMounted, ref } from "vue";
 const containerElem = ref(null);
 const layountElem = ref(null);
 onMounted(() => {
-  containerElem.value.style.height = document.body.clientHeight - (67 + 32) + "px";
-  layountElem.value.style.height = document.body.clientHeight - 32 + "px";
+  containerElem.value.style.height = document.body.clientHeight - (68 + 35) + "px";
+  layountElem.value.style.height = document.body.clientHeight - 35 + "px";
 });
 </script>
 

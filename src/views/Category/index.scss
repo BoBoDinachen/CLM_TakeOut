@@ -98,6 +98,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    overflow: hidden;
     justify-content: flex-start;
     // 标签按钮
     .goods-tags{
@@ -122,13 +123,15 @@
     .goods-list{
       // background-color: palegreen;
       width: 100%;
-      padding:5px 10px 5px;
+      padding:5px 10px 30px;
+      overflow: scroll;
       .title{
         display: inline-block;
         font-weight: bold;
         margin-bottom: 10px;
         background-color: #FF9900;
-        padding:2px 5px 2px;
+        padding:2px 10px 2px;
+        font-size: 1.2em;
         border-radius: 5px;
       }
       // 商品信息
@@ -150,53 +153,65 @@
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          div{
-            // 商品标签
-            &:nth-of-type(1){
-              // background-color: plum;
-              display: flex;
-              align-items: center;
-              span{
-                background-color: #f2f2f2;
-                margin-right: 10px;
+          // 商品标签
+          .goods-tag{
+            display: flex;
+            align-items: center;
+            span{
+              background-color: #f2f2f2;
+              margin-right: 10px;
+              font-size: .8em;
+              padding: 0px 5px 0px;
+              border-radius: 5px;
+              color: #333333;
+              margin-bottom: 5px;
+            }
+          }
+          // 商品价格
+          .goods-price{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+            padding-right: 5px;
+            span{
+              &:nth-of-type(1){
                 font-size: .8em;
-                padding: 0px 5px 0px;
-                border-radius: 5px;
-                color: #333333;
-                margin-bottom: 5px;
+                font-weight: bold;
+                label{
+                  font-size: 1.5em;
+                }
               }
             }
-            &:nth-of-type(2){
+            div{
               display: flex;
-              justify-content: space-between;
               align-items: center;
-              margin-top: 5px;
-              padding-right: 5px;
               span{
                 &:nth-of-type(1){
-                  font-size: .8em;
+                  margin: 0 5px 0;
+                  font-size: 1.2em;
                   font-weight: bold;
-                  label{
-                    font-size: 1.5em;
-                  }
                 }
                 &:nth-of-type(2){
                   display: inline-block;
-                  width: 30px;
-                  height: 30px;
+                  width: 20px;
+                  height: 20px;
+                  line-height: 20px;
                   background-color: #FF9900;
                   text-align: center;
                   color: white;
-                  font-size: 1.2em;
+                  font-size: 1.1em;
+                  padding-top: 1.5px;
                   font-weight: bold;
                   border-radius: 25px;
                 }
               }
+              
             }
           }
           p{
             // background-color: #FF9900;
-            height: 35px;
+            height: 34px;
             font-size: .9em;
             // text-indent: 2px;
             line-height: 17px;
@@ -212,6 +227,65 @@
     }
   }
 }
+
+// 购物车 浮窗
+.cart-box{
+  position: absolute;
+  bottom: 0;left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  color: white;
+  height: 3em;
+  background-color: #333333;
+  border-radius: 25px;
+  padding: 5px 0px 5px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  label{
+    flex: 1;
+    margin-left: 20px;
+    font-size: 1.2em;
+  }
+  div{
+    position: relative;
+    .icon-bao{
+      width: 2em; height: 2em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+    span{
+      position: absolute;
+      background-color: #eabc44;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 20px;
+      right: 0;
+      transform: translate(50%,-20%);
+    }
+  }
+  a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    background-color: #eabc44;
+    height: 3em;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    font-weight: bold;
+    border-radius:0 25px 25px 0;
+    transition: all .3s linear;
+    &:active{
+      background-color: #999999;
+    }
+  }
+}
+// 图标
 .icon {
   width: 1.5em; height: 1.5em;
   vertical-align: -0.15em;

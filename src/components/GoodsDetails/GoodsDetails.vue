@@ -14,21 +14,28 @@
         <use xlink:href="#icon-shoucang1"></use>
       </svg>
       <!-- 图片 -->
-      <img src="@image/炒牛肉.jpeg" alt="" class="food-img" />
+      <img
+        :src="imgUrl + '/getGoodsPicture/' + state.goods.goodsId"
+        alt=""
+        class="food-img"
+      />
       <!-- 下面的盒子 -->
       <div class="content-box">
         <!-- 商品名 -->
-        <h2>{{ state.goods.name + "  (" + state.goods.shop_name + ")" }}</h2>
+        <h2>
+          {{ state.goods.goodsName + "  (" + state.goods.shopName + ")" }}
+          <a @click="goToShop(state.goods.shopId, state.goods.shopName)">去店铺逛逛</a>
+        </h2>
         <!-- 标签 -->
         <div class="tag">
-          <span>{{ state.goods.type }}</span>
+          <span>{{ state.goods.goodsType }}</span>
           <span>评分:{{ state.goods.score }}</span>
-          <span>销量:{{ state.goods.sales }}</span>
+          <span>销量:{{ state.goods.salesVolume }}</span>
         </div>
         <!-- 描述 -->
         <div class="describe">
           <label>商品描述</label>
-          <p>{{ state.goods.describe }}</p>
+          <p>{{ state.goods.goodsDescribe }}</p>
         </div>
         <!-- 口味选择 -->
         <div class="select">
@@ -72,7 +79,12 @@
 
 <script setup>
 import { reactive, onMounted, inject } from "vue";
+import { useRouter } from "vue-router";
 import toast from "@comps/Toast/index.js";
+import { imgUrl } from "../../request/api/goods";
+import { addTrolley } from "../../request/api/trolley";
+
+const router = useRouter();
 // 响应式数据
 const state = reactive({
   isShow: false,
@@ -91,6 +103,19 @@ function show() {
 // 关闭盒子
 function handleColse() {
   state.isShow = false;
+}
+// 去对应的店铺
+function goToShop(shopId, shopName) {
+  setTimeout(() => {
+    router.push({
+      path: "/app/shopList/category",
+      query: {
+        shopId: shopId,
+        shopName: shopName,
+      },
+    });
+    handleColse();
+  }, 300);
 }
 // 点击收藏夹
 function handleFavorite() {
@@ -130,13 +155,36 @@ function subtractNumber() {
 }
 // 加入购物车
 function joinShoppCart() {
-  toast({
-    text: "已加入购物车√",
-    type: "success",
-  });
-  setTimeout(() => {
-    handleColse();
-  }, 500);
+  const uid = sessionStorage["uid"];
+  const token = localStorage["token"];
+  // console.log("uid", uid);
+  if (uid === undefined || token === "") {
+    toast({
+      text: "请先登录!",
+      type: "warning",
+    });
+  } else {
+    addTrolley({
+      goodsId: state.goods.goodsId,
+      customerId: uid,
+      goodsAmount: state.goodsAmount,
+    }).then((res) => {
+      if (res.statusCode === "200") {
+        toast({
+          text: "已加入购物车√",
+          type: "success",
+        });
+      } else {
+        toast({
+          text: "添加失败!",
+          type: "error",
+        });
+      }
+    });
+    setTimeout(() => {
+      handleColse();
+    }, 500);
+  }
 }
 </script>
 

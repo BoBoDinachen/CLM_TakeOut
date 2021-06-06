@@ -1,5 +1,17 @@
 <template>
   <div class="category-box">
+    <!-- 购物车浮窗 -->
+    <div class="cart-box">
+      <!-- 图标 -->
+      <div @click="toToShoppingCart">
+        <svg class="icon-bao" aria-hidden="true">
+          <use xlink:href="#icon-bao"></use>
+        </svg>
+        <span>{{ goodsAmount }}</span>
+      </div>
+      <label>￥{{ totalPrice }}</label>
+      <a @click="goToSettlement">结算</a>
+    </div>
     <!-- 返回按钮 -->
     <div class="back-box">
       <svg class="icon" aria-hidden="true">
@@ -9,7 +21,7 @@
     </div>
     <!-- 店铺信息 -->
     <div class="shop-info-box">
-      <label>好吃不火饭店</label>
+      <label>{{ shopName }}</label>
       <div>
         <span>营业时间：9:00-20:00</span>
         <span>距离600m</span>
@@ -37,25 +49,32 @@
       <!-- 对应标签页的商品列表 -->
       <ul class="goods-list">
         <label class="title">{{ activeTagName }}</label>
-        <li v-for="goods in state.goodsList">
+        <li v-for="goods in state.goodsList" :key="goods.goodsId">
           <!-- 商品图片 -->
-          <img src="@image/炒牛肉.jpeg" alt="" />
+          <img
+            :src="imgUrl + '/getGoodsPicture/' + goods.goodsId"
+            alt=""
+            @click="showGoodsDetails({ goods })"
+          />
           <!-- 商品信息 -->
           <div class="goods-info">
             <!-- 名字 -->
-            <h3>{{ goods.name }}</h3>
+            <h3>{{ goods.goodsName }}</h3>
             <!-- 标签 -->
-            <div>
+            <div class="goods-tag">
               <span>评分:{{ goods.score }}</span>
-              <span>每月:{{ goods.sales }}单</span>
+              <span>每月:{{ goods.salesVolume }}单</span>
             </div>
             <!-- 描述 -->
-            <p>{{ goods.describe }}</p>
-            <div>
+            <p>{{ goods.goodsDescribe }}</p>
+            <div class="goods-price">
               <span
                 ><label>￥{{ goods.price }}</label> 起</span
               >
-              <span>＋</span>
+              <div>
+                <span v-show="goods.amount !== 0">1</span>
+                <span @click="handleAugment(goods)">＋</span>
+              </div>
             </div>
           </div>
         </li>
@@ -65,37 +84,56 @@
 </template>
 
 <script>
-import { reactive, computed } from "vue";
+import { reactive, computed, inject, ref } from "vue";
+import { useRoute } from "vue-router";
+import { getGoodsListByType, getListByRecommend, imgUrl } from "../../request/api/goods";
+import { addTrolley } from "../../request/api/trolley";
 export default {
   data() {
-    return {};
+    return {
+      imgUrl,
+    };
   },
   components: {},
+  created() {
+    getListByRecommend(this.shopId).then((res) => {
+      this.state.goodsList = res.data.goodsList;
+    });
+  },
   methods: {
     goBack() {
       this.$router.push("/app/shopList");
     },
+    // 去结算
+    goToSettlement() {
+      setTimeout(() => {
+        this.$router.push("/app/shoppingCart/settlement");
+      }, 300);
+    },
+    // 去购物车
+    toToShoppingCart() {
+      setTimeout(() => {
+        this.$router.push("/app/shoppingCart");
+      }, 100);
+    },
   },
   setup(props) {
+    const route = useRoute();
+    const shopName = ref(route.query.shopName);
+    const shopId = route.query.shopId;
+    console.log(route.query.shopId);
+    // console.log(shopName.value);
     const state = reactive({
       goodsList: [
-        {
-          id: "1",
-          name: "炒牛肉",
-          sales: "300",
-          price: "14",
-          score: "4",
-          describe:
-            "下饭又美味房间大军阀撒娇的放假撒法克斯的开发建设附件是丰大厦附近撒赖咖啡碱吉萨福克斯大家雷锋精神的开发手机的辐射大",
-        },
-        {
-          id: "2",
-          name: "泡椒猪肝",
-          sales: "255",
-          price: "14",
-          score: "4",
-          describe: "下饭又美味",
-        },
+        // {
+        //   goodsId: "",
+        //   goodsName: "",
+        //   sales: "",
+        //   price: "",
+        //   score: "",
+        //   amount: 0,
+        //   describe: "",
+        // },
       ],
       goodsType: [
         { icon: "#icon-tuijian", tag: "招牌推荐", isActive: true },
@@ -104,15 +142,37 @@ export default {
         { icon: "#icon-xiaochao", tag: "小炒", isActive: false },
         { icon: "#icon-zhishifufeiqiapianicon-", tag: "汤类", isActive: false },
         { icon: "#icon-xiaochiMBE", tag: "小吃", isActive: false },
-        { icon: "#icon-shucai", tag: "蔬菜", isActive: false },
+        // { icon: "#icon-shucai", tag: "蔬菜", isActive: false },
       ],
     });
+    // 消息提示组件
+    const toast = inject(["toast"]);
+    // 显示商品详情组件
+    const showGoodsDetails = inject(["showGoodsDetails"]);
     // 计算当前选中状态的标签名称
     const activeTagName = computed(() => {
       let type = state.goodsType.filter((type) => {
         return type.isActive != false;
       });
       return type[0].tag;
+    });
+    // 计算商品列表中的所有数量
+    const goodsAmount = computed(() => {
+      let amount = 0;
+      state.goodsList.forEach((goods) => {
+        amount += goods.amount;
+      });
+      return amount;
+    });
+    // 计算购物车中的商品总价格
+    const totalPrice = computed(() => {
+      let totalPrice = 0;
+      state.goodsList.forEach((goods) => {
+        if (goods.amount != 0) {
+          totalPrice += goods.price * goods.amount;
+        }
+      });
+      return totalPrice;
     });
     // 点击选中商品类型时
     function handelClickType(type) {
@@ -121,13 +181,61 @@ export default {
         type.isActive = false;
       });
       type.isActive = true;
+
       //根据当前选中的商品类别，发送请求，改变当前商品列表
-      // request
+      if (type.tag === "招牌推荐") {
+        getListByRecommend(shopId).then((res) => {
+          console.log(res);
+          state.goodsList = res.data.goodsList;
+        });
+      } else {
+        getGoodsListByType(shopId, type.tag).then((res) => {
+          // console.log(res.data.goodsList);
+          state.goodsList = res.data.goodsList;
+        });
+      }
+    }
+    // 点击加入购物车时,显示商品数量
+    function handleAugment(goods) {
+      const uid = sessionStorage["uid"];
+      const token = localStorage["token"];
+      console.log("uid", uid);
+      if (uid === undefined || token === "") {
+        toast({
+          text: "请先登录!",
+          type: "warning",
+        });
+      } else {
+        goods.amount = 1;
+        addTrolley({
+          goodsId: goods.goodsId,
+          customerId: uid,
+        }).then((res) => {
+          if (res.statusCode === "200") {
+            toast({
+              text: "已添加进购物车!",
+              type: "success",
+            });
+          } else {
+            toast({
+              text: "添加失败!",
+              type: "error",
+            });
+          }
+        });
+      }
+      // 发送请求
     }
     return {
       state,
       handelClickType,
       activeTagName,
+      handleAugment,
+      goodsAmount,
+      totalPrice,
+      shopName,
+      shopId,
+      showGoodsDetails,
     };
   },
 };

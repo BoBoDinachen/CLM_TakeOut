@@ -1,5 +1,13 @@
 <template>
   <header>
+    <span
+      @click.native="goBack"
+      v-if="title === '订单详情' || title === '提交订单' || title === '我的购物车'"
+    >
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-fanhui"></use>
+      </svg>
+    </span>
     <h2>{{ title }}</h2>
   </header>
 </template>
@@ -11,6 +19,9 @@ const router = useRouter();
 const route = useRoute();
 // 当前的标题
 const title = ref("吃了吗外卖");
+function goBack() {
+  router.back();
+}
 watch(
   () => route.path,
   async (newPath) => {
@@ -45,6 +56,9 @@ watch(
         case "category":
           title.value = "店铺商品";
           break;
+        case "details":
+          title.value = "订单详情";
+          break;
         default:
           title.value = "吃了吗外卖";
       }
@@ -55,11 +69,34 @@ watch(
 
 <style lang="scss" scoped>
 header {
-  z-index: -1000;
-  background-color: white;
+  z-index: 1000;
+  background-color: #333333;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
   h2 {
     font-size: 1.2em;
     text-align: center;
+    width: 100%;
+  }
+  span {
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  }
+  .icon {
+    // position: absolute;
+    // left: 10px;
+    width: 1.2em;
+    height: 1.2em;
+    font-weight: bold;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
   }
 }
 </style>

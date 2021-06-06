@@ -1,0 +1,81 @@
+.increAddress-box{
+  position: absolute;
+  z-index: 1001;
+  width: 100%;
+  top: 0px;
+  // height: 100%;
+  background-color: white;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .header-box{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid #999999;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px 0 5px;
+    margin-bottom: 5px;
+    span{
+      flex: 1;
+    }
+    .icon-back {
+      position: absolute;
+      width: 1.2em; height: 1.2em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+      margin-left: 10px;
+   }
+  }
+  .input-box{
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    // height: 100%;
+    // background-color: palevioletred;
+    padding: 5px 10px 5px;
+    div{
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      label{
+        font-weight: bold;
+        position: absolute;
+      }
+      input{
+        // position: absolute;
+        transform: translateX(30%);
+        left: 80px;
+        width: 70%;
+        height: 40px;
+        background-color: unset;
+        border-bottom: 2px solid #999999;
+        font-size: 1.1em;
+        &:focus{
+          border-bottom: 2px solid #FF9900;
+        }
+      }
+    }
+    button{
+      margin-top: 5px;
+      height: 50px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-indent: 5px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #333333;
+      border-radius: 5px;
+    }
+  }
+}
