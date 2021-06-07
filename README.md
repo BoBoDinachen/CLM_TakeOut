@@ -21,17 +21,15 @@
 #### 2.界面展示
 ##### 1. 首页
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\首页1.jpg" style="zoom: 25%;" />
+   <img src="./page-image/首页1.jpg" style="zoom: 25%;" /><img src="./page-image/首页2.jpg" style="zoom:25%;" /><img src="./page-image/首页3.jpg" style="zoom:25%;" />
 
-   <img src="F:\Web项目\CLM_TakeOut_FrontEnd\图片\首页2.jpg" style="zoom:25%;" />
-
-##### 2. 分类
+##### 2. 店铺列表和商品分类
+  <img src="./page-image/店铺列表.jpg" style="zoom:25%;" width="200"/>
+  <img src="./page-image/店铺列表.jpg" style="zoom:25%;" width="200"/><img src="./page-image/商品详情2.jpg" style="zoom:25%;" width="200"/>
 
 ##### 3. 购物车
 
-   <img src="./page-image/购物车1.jpg" style="zoom:25%;" width="200" />
-
-   <img src="./page-image/购物车2.jpg" style="zoom:25%;" width="200" />
+   <img src="./page-image/购物车1.jpg" style="zoom:25%;" width="200" /><img src="./page-image/购物车2.jpg" style="zoom:25%;" width="200" />
 
 ##### 4. 订单
 
@@ -65,3 +63,9 @@
 * <b>2021/5/31:</b><br>
   1. 部分页面样式优化
   2. 新增店铺商品页面
+* <b>2021/6/7:</b><br>
+  1. 新增添加地址功能,
+  2. 修复付款时，判断是否填写地址功能
+  3. 修复店铺商品页面商品加入订单时的问题
+  4. 优化订单删除功能
+  5. 新增订单和地址列表为空时，显示提示信息
