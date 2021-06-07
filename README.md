@@ -21,7 +21,7 @@
 #### 2.界面展示
 ##### 1. 首页
 
-   <img src="./page-image/首页1.jpg" style="zoom: 25%;" width="200"/><img src="./page-image/首页2.jpg" style="zoom:25%;" /><img src="./page-image/首页3.jpg" style="zoom:25%;" width="200" />
+   <img src="./page-image/首页1.jpg" style="zoom: 25%;" width="200"/><img src="./page-image/首页2.jpg" style="zoom:25%;" width="200" /><img src="./page-image/首页3.jpg" style="zoom:25%;" width="200" />
 
 ##### 2. 店铺列表和商品分类
   <img src="./page-image/店铺列表.jpg" style="zoom:25%;" width="200"/><img src="./page-image/店铺列表.jpg" style="zoom:25%;" width="200"/><img src="./page-image/商品详情2.jpg" style="zoom:25%;" width="200"/>
