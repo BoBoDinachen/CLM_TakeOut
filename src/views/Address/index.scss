@@ -29,7 +29,7 @@
     }
     a{
       background-color: #FF9900;
-      padding: 2px 10px 2px;
+      padding: 5px 10px 5px;
       border-radius: 5px;
     }
   }
@@ -59,6 +59,7 @@
         color: #FF9900;
       }
       .address-info{
+        flex: 1;
         span{
           &:nth-of-type(1){ 
             background-color: #009966;
@@ -76,8 +77,19 @@
         }
         div{
           margin-top: 10px;
-
         }
+      }
+      a{
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 10px 5px;
+        margin-right: 20px;
+        color: white;
+        font-size: .9em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-indent:2px;
+        background-color: #FF6666;
       }
     }
   }
@@ -97,5 +109,26 @@
     text-indent: 2px;
     color: white;
     width: 90%;
+  }
+  // 当地址列表为空时
+  .prompt-box{
+    position: absolute;
+    top: 35%;left: 50%;
+    transform: translate(-50%,-50%);
+    width: 95%;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 20px;
+    img{
+      height: 250px;
+    }
+    h2{
+      color: black;
+    }
   }
 }

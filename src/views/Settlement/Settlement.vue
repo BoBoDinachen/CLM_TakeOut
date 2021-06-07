@@ -30,7 +30,7 @@
     <div class="goods-list">
       <label>商品列表</label>
       <ul>
-        <li v-for="orderGoods in state.orderGoodsList" :key="orderGoods.trolleyId">
+        <li v-for="orderGoods in state.orderGoodsList" :key="orderGoods.goodsId">
           <img :src="imgUrl + '/getGoodsPicture/' + orderGoods.goodsId" alt="" />
           <div class="info-box">
             <div>
@@ -116,8 +116,10 @@ export default {
     state.orderGoodsList = orderGoodsList;
     // 获取客户配送信息
     getCurrentAddress(sessionStorage["uid"]).then((res) => {
-      // console.log(res);
-      state.customerInfo = res.data.address[0];
+      console.log(res);
+      if (res.data.address.length != 0) {
+        state.customerInfo = res.data.address[0];
+      }
     });
     // 处理总价格
     const totalPrice = computed(() => {
@@ -130,6 +132,7 @@ export default {
 
     // 付款方法
     function Payment(isPay) {
+      // 判断当前有没有选择地址
       createOrder({
         customerId: sessionStorage["uid"],
         orderNumber: uuid(),
@@ -137,6 +140,8 @@ export default {
         orderStatus: isPay,
         totalPrice: totalPrice.value,
         dispatchAddress: state.customerInfo.address,
+        customerName: state.customerInfo.name,
+        telephone: state.customerInfo.telephone,
       }).then((res) => {
         // 拿到订单id 和 购物车id列表
         const orderId = res.data.orderId; // 订单id
@@ -161,15 +166,19 @@ export default {
                 text: "已加入订单!",
                 type: "success",
               });
-              // 加入订单后,将购物车中对应的商品删除
-              deleteTrolleyList({
-                trolleyIds: trolleyIds,
-              }).then((res) => {
-                console.log(res);
-                if (res.statusCode === "200") {
-                  router.push("/app/shoppingCart");
-                }
-              });
+              if (trolleyIds[0] !== undefined) {
+                // 加入订单后,将购物车中对应的商品删除
+                deleteTrolleyList({
+                  trolleyIds: trolleyIds,
+                }).then((res) => {
+                  console.log(res);
+                  if (res.statusCode === "200") {
+                    router.push("/app/shoppingCart");
+                  }
+                });
+              } else {
+                router.push("/app/order");
+              }
             }
             console.log(res);
           });
@@ -179,11 +188,27 @@ export default {
     }
     // 点击稍后付款  创建订单
     function laterPayment() {
-      Payment(0);
+      // 判断当前客户信息是否为空
+      if (Object.keys(state.customerInfo).length === 0) {
+        toast({
+          text: "宁还煤油选择地址噢~",
+          type: "warning",
+        });
+      } else {
+        Payment(0);
+      }
     }
     // 点击现在付款 创建订单
     function nowPayment() {
-      Payment(1);
+      // 判断当前客户信息是否为空
+      if (Object.keys(state.customerInfo).length === 0) {
+        toast({
+          text: "宁还煤油选择地址噢~",
+          type: "warning",
+        });
+      } else {
+        Payment(1);
+      }
     }
     return {
       state,

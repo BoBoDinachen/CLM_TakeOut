@@ -57,11 +57,11 @@
       </div>
       <div>
         <span>配送费</span>
-        <span>￥3</span>
+        <span>￥0</span>
       </div>
       <div>
         <span>合计:</span>
-        <span>￥{{ order.orderInfo.totalPrice + 3 }}</span>
+        <span>￥{{ order.orderInfo.totalPrice }}</span>
       </div>
     </div>
     <!-- 配送信息 -->
@@ -69,11 +69,11 @@
       <div>配送信息</div>
       <div>
         <span>客户姓名</span>
-        <b>{{ customer.customerInfo.customerName }}</b>
+        <b>{{ order.orderInfo.customerName }}</b>
       </div>
       <div>
         <span>客户电话</span>
-        <b>{{ customer.customerInfo.telephone }}</b>
+        <b>{{ order.orderInfo.telephone }}</b>
       </div>
       <div>
         <span>配送地址</span>
@@ -101,22 +101,17 @@ export default {
     const order = reactive({
       orderInfo: {},
     });
-    const customer = reactive({
-      customerInfo: {},
-    });
     // 加载订单信息
     getOrderInfoById(orderId.value).then((res) => {
       // console.log(res);
       order.orderInfo = res.data.orderInfo;
-      customer.customerInfo = res.data.orderInfo.customer;
-      // 加载商品列表信息
+      // 加载商品列表信息;
       getOrderGoodsList(orderId.value).then((res) => {
         order.orderInfo["orderGoodsList"] = res.data.orderGoodsList;
       });
     });
     // 加载订单商品信息
     return {
-      customer,
       order,
     };
   },

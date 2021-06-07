@@ -1,6 +1,6 @@
 .increAddress-box{
   position: absolute;
-  z-index: 1001;
+  z-index: 900;
   width: 100%;
   top: 0px;
   // height: 100%;
@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   .header-box{
     width: 100%;
     height: 40px;
@@ -34,20 +35,25 @@
    }
   }
   .input-box{
-    flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    // height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    // background-color: #FF9900;
+    box-shadow: 0 0 10px 1px #999999;
+    width: 95%;
+    height: 50%;
+    border-radius: 5px;
     // background-color: palevioletred;
-    padding: 5px 10px 5px;
+    padding: 10px 20px 5px;
     div{
       position: relative;
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
+      width: 100%;
+      margin-bottom: 25px;
       label{
         font-weight: bold;
         position: absolute;
@@ -55,8 +61,8 @@
       input{
         // position: absolute;
         transform: translateX(30%);
+        width: 75%;
         left: 80px;
-        width: 70%;
         height: 40px;
         background-color: unset;
         border-bottom: 2px solid #999999;
@@ -68,6 +74,7 @@
     }
     button{
       margin-top: 5px;
+      width: 100%;
       height: 50px;
       font-weight: bold;
       letter-spacing: 5px;

@@ -3,7 +3,7 @@
     <!-- 购物车浮窗 -->
     <div class="cart-box">
       <!-- 图标 -->
-      <div @click="toToShoppingCart">
+      <div @click="showOrderGoods">
         <svg class="icon-bao" aria-hidden="true">
           <use xlink:href="#icon-bao"></use>
         </svg>
@@ -72,7 +72,8 @@
                 ><label>￥{{ goods.price }}</label> 起</span
               >
               <div>
-                <span v-show="goods.amount !== 0">1</span>
+                <span v-show="goods.amount != 0" @click="handleDecrease(goods)">－</span>
+                <span v-show="goods.amount != 0">{{ goods.amount }}</span>
                 <span @click="handleAugment(goods)">＋</span>
               </div>
             </div>
@@ -88,6 +89,7 @@ import { reactive, computed, inject, ref } from "vue";
 import { useRoute } from "vue-router";
 import { getGoodsListByType, getListByRecommend, imgUrl } from "../../request/api/goods";
 import { addTrolley } from "../../request/api/trolley";
+import toast from "../../components/Toast";
 export default {
   data() {
     return {
@@ -106,15 +108,28 @@ export default {
     },
     // 去结算
     goToSettlement() {
-      setTimeout(() => {
-        this.$router.push("/app/shoppingCart/settlement");
-      }, 300);
+      // 判断订单商品是否为空
+      if (this.orderGoodsList.length === 0) {
+        toast({
+          text: "您还没有加入商品噢~",
+          type: "warning",
+        });
+      } else {
+        sessionStorage["orderGoodsList"] = JSON.stringify(this.orderGoodsList);
+        setTimeout(() => {
+          this.$router.push("/app/shoppingCart/settlement");
+        }, 300);
+      }
     },
-    // 去购物车
-    toToShoppingCart() {
-      setTimeout(() => {
-        this.$router.push("/app/shoppingCart");
-      }, 100);
+    // 显示订单商品
+    showOrderGoods() {
+      // setTimeout(() => {
+      //   this.$router.push("/app/shoppingCart");
+      // }, 100);
+      toast({
+        text: "此功能暂未开发,抱歉~",
+        type: "warning",
+      });
     },
   },
   setup(props) {
@@ -174,6 +189,22 @@ export default {
       });
       return totalPrice;
     });
+
+    // 计算加入到订单的商品列表，数量不为0
+    const orderGoodsList = computed(() => {
+      let list = state.goodsList.filter((goods) => {
+        return goods.amount != 0;
+      });
+      let orderGoodsList = [];
+      list.map((goods) => {
+        orderGoodsList.push({
+          goodsId: goods.goodsId,
+          goodsAmount: goods.amount,
+          goods: goods,
+        });
+      });
+      return orderGoodsList;
+    });
     // 点击选中商品类型时
     function handelClickType(type) {
       // 改变选中样式
@@ -195,34 +226,51 @@ export default {
         });
       }
     }
-    // 点击加入购物车时,显示商品数量
+    // 减去订单商品数量
+    function handleDecrease(goods) {
+      goods.amount -= 1;
+      if (goods.amount < 0) {
+        goods.amount = 0;
+      }
+      console.log(orderGoodsList.value);
+    }
+    // 点击加入订单,显示数量和减号
     function handleAugment(goods) {
+      // 加入订单商品时，先判断是否已登录
       const uid = sessionStorage["uid"];
       const token = localStorage["token"];
-      console.log("uid", uid);
       if (uid === undefined || token === "") {
         toast({
           text: "请先登录!",
           type: "warning",
         });
       } else {
-        goods.amount = 1;
-        addTrolley({
-          goodsId: goods.goodsId,
-          customerId: uid,
-        }).then((res) => {
-          if (res.statusCode === "200") {
-            toast({
-              text: "已添加进购物车!",
-              type: "success",
-            });
-          } else {
-            toast({
-              text: "添加失败!",
-              type: "error",
-            });
-          }
-        });
+        goods.amount += 1;
+        if (goods.amount > 10) {
+          toast({
+            text: "最多选择十个噢!",
+            type: "warning",
+          });
+          goods.amount = 10;
+        }
+        console.log(orderGoodsList.value);
+        // 将这个商品加入
+        // addTrolley({
+        //   goodsId: goods.goodsId,
+        //   customerId: uid,
+        // }).then((res) => {
+        //   if (res.statusCode === "200") {
+        //     toast({
+        //       text: "已添加进购物车!",
+        //       type: "success",
+        //     });
+        //   } else {
+        //     toast({
+        //       text: "添加失败!",
+        //       type: "error",
+        //     });
+        //   }
+        // });
       }
       // 发送请求
     }
@@ -230,12 +278,14 @@ export default {
       state,
       handelClickType,
       activeTagName,
+      handleDecrease,
       handleAugment,
       goodsAmount,
       totalPrice,
       shopName,
       shopId,
       showGoodsDetails,
+      orderGoodsList,
     };
   },
 };

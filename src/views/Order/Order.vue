@@ -82,6 +82,9 @@
             取消订单
           </button>
           <button v-show="order.orderStatus === 0">立即付款</button>
+          <button v-show="order.orderStatus === 1" @click="deleteOrder(order.orderId)">
+            删除订单
+          </button>
           <button v-show="order.orderStatus === 1">确定收货</button>
           <button v-show="order.orderStatus === 2" @click="deleteOrder(order.orderId)">
             删除订单
@@ -90,6 +93,11 @@
         </div>
       </li>
     </ul>
+    <!-- 订单为空时显示 -->
+    <div class="prompt-box" v-show="state.orderList.length === 0">
+      <img src="@svg/order-icon.svg" alt="" />
+      <h2>订单为空噢~</h2>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -183,7 +191,9 @@ export default {
                 type: "success",
               });
               // 重新加载订单列表
-              initOrderList();
+              state.orderList = state.orderList.filter((order) => {
+                return order.orderId != orderId;
+              });
             }
           });
         })

@@ -76,6 +76,8 @@ const confirm = inject(["confirm"]);
 const state = reactive({
   customerInfo: {},
 });
+
+// 组件挂载之前
 onBeforeMount(() => {
   // console.log("token:", localStorage["token"]);
   // 组件挂载之前先判断是否有存在token

@@ -5,9 +5,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   // 选项卡
   .tag-option{
     background-color: white;
+    width: 100%;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -29,6 +31,7 @@
   }
   // 订单列表
   .order-list{
+    width: 100%;
     height: 100%;
     // background-color: aquamarine;
     background-color: white;
@@ -111,7 +114,11 @@
               color: #333333;
             }
           }
-          &:nth-of-type(4){
+          &:nth-of-type(3){
+            background-color: #ee0a24;
+            color: white;
+          }
+          &:nth-of-type(5){
             background-color: #ee0a24;
             color: white;
           }
@@ -128,6 +135,29 @@
         }
       }
       border-bottom: 1px solid #999999;
+    }
+  }
+  // 订单为空时显示
+  .prompt-box{
+    position: absolute;
+    width: 98%;
+    height: 300px;
+    background-color: #FFCC33;
+    top: 35%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 5px;
+    img{
+      height: 250px;
+    }
+    h2{
+      color: white; 
+      letter-spacing: 5px;
+      text-indent: 5px;
     }
   }
 }
