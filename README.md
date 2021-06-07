@@ -29,8 +29,7 @@
 
 ##### 3. 购物车
 
-   <img src="./page-image/购物车1.jpg" style="zoom:25%;" width="200" /> 
-   <img src="./page-image/购物车2.jpg" style="zoom:25%;" width="200" />
+   <img src="./page-image/购物车1.jpg" style="zoom:25%;" width="200" /> <img src="./page-image/购物车2.jpg" style="zoom:25%;" width="200" />
 
 ##### 4. 订单
 
